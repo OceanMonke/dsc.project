@@ -11,7 +11,7 @@ namespace Dsc.Project.Domain.Services
     {
 
 
-        EmailFooterDto GetFooter()
+        Task<EmailFooterDto> GetFooter(string userName, string password);
 
 
     }

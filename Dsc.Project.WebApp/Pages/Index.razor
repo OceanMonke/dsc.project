@@ -1,0 +1,43 @@
+﻿@page "/"
+
+@using Dsc.Project.Domain.Services
+@inject IEmailFooterService EmailFooterService;
+
+<div class="row">
+    @((MarkupString) HtmlSignature)
+</div>
+<br />
+<div class="row">
+    <div class="card bg-light">
+        <div class="card-body">
+            <label class="col-4"> UserName: </label>
+            <input class="col-7" type="text" @bind="UserName" />
+        </div>
+        <div class="card-body">
+            <label class="col-4"> Password: </label>
+            <input class="col-7" type="password" @bind="Password" />
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <button @onclick="Callback"> Load signature </button>
+</div>
+
+
+@code
+{
+    public string HtmlSignature { get; set; }
+
+    public string UserName { get; set; }
+
+    public string Password { get; set; }
+
+    private async Task Callback()
+    {
+        var emailFooterDto = await EmailFooterService.GetFooter(UserName, Password);
+        HtmlSignature = emailFooterDto.HtmlSignature;
+
+        StateHasChanged();
+    }
+}

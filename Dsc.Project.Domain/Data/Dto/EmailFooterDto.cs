@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace Dsc.Project.Domain.Data.Dto
 {
-    public class EmailFooterDto
-    {
-    }
+    public record EmailFooterDto(string HtmlSignature);
 }
